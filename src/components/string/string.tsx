@@ -83,7 +83,7 @@ export const StringComponent: FC = () => {
         <Input isLimitText={true} maxLength={11} onChange={onChange}></Input>
         <Button text='Развернуть' type="submit" isLoader={count.loader} disabled={string.length > 0 ? false: true}></Button>
       </form>
-      <div  className={styles.arr}>
+      <div  className={styles.result}>
         {
           arrStr?.map((item, index)=>(
             <Circle letter={item.value} key={index} state={item.color}/>

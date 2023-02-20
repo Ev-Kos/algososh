@@ -1,11 +1,11 @@
 .form {
     display: flex;
     gap: 12px;
-    max-width: 522px;
+    max-width: 567px;
     margin: auto;
 }
 
-.arr {
+.result {
     justify-content: center;
     display: flex;
     flex-direction: row;
