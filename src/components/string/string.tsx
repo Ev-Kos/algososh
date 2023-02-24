@@ -6,22 +6,19 @@ import { Button } from '../ui/button/button';
 import { Circle } from '../ui/circle/circle';
 import { ElementStates } from '../../types/element-states';
 import {DELAY_IN_MS} from '../../constants/delays'
-
-type TString = {
-  value: string;
-  color: ElementStates;
-}
+import { delay } from '../utils/utils';
+import { TArrString } from '../../types/types';
 
 export const StringComponent: FC = () => {
   const [string, setString] = useState('');
-  const [arrStr, setArrStr] = useState<Array<TString>>();
+  const [arrStr, setArrStr] = useState<TArrString[]>();
   const [count, setCount] = useState({ start: -1, end: 99, loader: false });
 
   const onChange = (e: ChangeEvent<HTMLInputElement>)=>{
     setString(e.target.value);
   }
 
-  const colorSwap = (arr: TString[], firstIndex: number, secondIndex: number): void => {
+  const colorSwap = (arr: TArrString[], firstIndex: number, secondIndex: number): void => {
     arr[secondIndex].color = arr[firstIndex].color = ElementStates.Changing;
     if (secondIndex === firstIndex) {
       arr[secondIndex].color = ElementStates.Modified;
@@ -34,7 +31,7 @@ export const StringComponent: FC = () => {
     }
   }
 
-  const swap = (arr: TString[], firstIndex: number, secondIndex: number) => {
+  const swap = (arr: TArrString[], firstIndex: number, secondIndex: number) => {
     let tmp = arr[firstIndex];
     arr[firstIndex] = arr[secondIndex];
     arr[secondIndex] = tmp;
@@ -62,26 +59,29 @@ export const StringComponent: FC = () => {
     setCount({ ...count, start: -1, end: 12, loader: true });
   }
 
-  const reverseString = (word: TString[]) => {
+  const reverseString = (string: TArrString[]) => {
     let start = 0;
-    let end = word.length - 1;
+    let end = string.length - 1;
     let curr = 1;
     while (start <= end) {
-      setArrStr([...word]);
-      (function(start, end, curr) {
-        setTimeout(() => {
-          swap(word, start, end);
-          setArrStr([...word]);
-        }, DELAY_IN_MS * curr);
+      setArrStr([...string]);
+      (async function(start, end, curr) {
+        await delay(DELAY_IN_MS * curr)
+        swap(string, start, end);
+        setArrStr([...string]);
       })(start++, end--, curr++); 
     }
-  };
+  }
 
   return (
-    <SolutionLayout title="Строка">
+    <SolutionLayout title='Строка'>
       <form className={styles.form} onSubmit={handleClick}>
         <Input isLimitText={true} maxLength={11} onChange={onChange}></Input>
-        <Button text='Развернуть' type="submit" isLoader={count.loader} disabled={string.length > 0 ? false: true}></Button>
+        <Button text='Развернуть' 
+          type='submit' 
+          isLoader={count.loader} 
+          disabled={string.length > 0 ? false: true}>
+        </Button>
       </form>
       <div  className={styles.result}>
         {
