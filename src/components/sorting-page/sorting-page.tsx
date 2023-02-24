@@ -10,13 +10,31 @@ import { Direction } from "../../types/direction";
 
 type TArr = {
   value: number;
-  color?: ElementStates;
+  color: ElementStates;
+}
+
+type TInput = {
+  choice: boolean;
+  bubble: boolean;
 }
 
 export const SortingPage: FC = () => {
   const [arr, setArr] = useState<TArr[]>([]);
-  const [nameSort, setNameSort] = useState<string>('choice');
   const [loader, setLoader]= useState(false);
+  const [input, setInput] = useState<TInput>({choice: true, bubble: false});
+
+  const selectInput = (item: string) => {
+    if (item === "choice") {
+      input.choice
+        ? setInput({ ...input, choice: false })
+        : setInput({ choice: true, bubble: false });
+    }
+    if (item === "bubble") {
+      input.bubble
+        ? setInput({ ...input, bubble: false })
+        : setInput({ choice: false, bubble: true });
+    }
+  }
 
   const randomArr = () => {
     const randomNumber = (minLen: number, maxLen: number) => {
@@ -126,39 +144,38 @@ export const SortingPage: FC = () => {
     setLoader(false);
   };
 
-  // const handleSortClick = (e: FormEvent) => {
-  //   if(nameSort === 'choice'){
-  //     if(e.currentTarget.classList.contains('ascending')){
-  //       selectionSortAsc(arr)
-  //     }
-  //     else{
-  //       selectionSortDes(arr);
-  //     }
-  //   }
-  //   else{
-  //     if(e.currentTarget.classList.contains('ascending')){
-  //       bubbleSortAsc(arr);
-  //     }
-  //     else{
-  //       bubbleSortDes(arr);
-  //     }
-  //   }
-  // }
+  //по возрастанию пузырьком
+  const bubbleSortAsc = async (arr: TArr[]) => {
+    setLoader(true);
+    const { length } = arr;
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) =>{
-    setNameSort(e.target.value);
-  }
+    for (let i = 0; i < length; i++) {
+      for (let j = 0; j < length - i - 1; j++) {
+        arr[j].color = ElementStates.Changing;
+        arr[j + 1].color = ElementStates.Changing;
+        setArr([...arr]);
+        await delay(500);
+        if (arr[j].value > arr[j + 1].value) {
+          swap(arr, j, j + 1);
+        }
+        arr[j].color = ElementStates.Default;
+      }
+      arr[length - i - 1].color = ElementStates.Modified;
+    }
+    setArr([...arr]);
+    setLoader(false);
+  };
 
   return (
     <SolutionLayout title="Сортировка массива">
       <form className={styles.form}>
         <div className={styles.radioButtons}>
-          <RadioInput label="Выбор" checked={nameSort === 'choice' ? true : false} onChange={onChange} value='choice'/>
-          <RadioInput label="Пузырёк" checked={nameSort === 'bubble' ? true : false} onChange={onChange} name='bubble'/>
+          <RadioInput label="Выбор" checked={input.choice} onChange={() => {selectInput("choice")}}/>
+          <RadioInput label="Пузырёк" checked={input.bubble} onChange={() => {selectInput("bubble")}}/>
         </div>
         <div className={styles.sortButtons}>
-          <Button type="button" text="По возрастанию" extraClass='ascending' sorting={Direction.Ascending}/>
-          <Button type="button" text="По убыванию" extraClass='descending' sorting={Direction.Descending} onClick={()=>bubbleSortDes(arr)} isLoader={loader}/>
+          <Button type="button" text="По возрастанию" extraClass='ascending' sorting={Direction.Ascending} isLoader={loader} onClick={() => {input.choice ? selectionSortAsc(arr) : bubbleSortAsc(arr)}}/>
+          <Button type="button" text="По убыванию" extraClass='descending' sorting={Direction.Descending} isLoader={loader} onClick={() => {input.choice ? selectionSortDes(arr) : bubbleSortDes(arr)}}/>
         </div>
         <Button type="submit" text="Новый массив" onClick={()=>handleClick}/>
       </form>
@@ -177,4 +194,4 @@ export const SortingPage: FC = () => {
       </div>
     </SolutionLayout>
   );
-};
+}
