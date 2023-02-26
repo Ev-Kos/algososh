@@ -17,7 +17,10 @@ type TInput = {
 
 export const SortingPage: FC = () => {
   const [arr, setArr] = useState<TArrNumber[]>([]);
-  const [loader, setLoader]= useState<boolean[]>([false,false, false]);
+  const [loader, setLoader]= useState({
+    ascBtn: false,
+    descBtn: false,
+    arrBtn: false});
   const [input, setInput] = useState<TInput>({choice: true, bubble: false});
 
   const randomArr = () => {
@@ -45,7 +48,7 @@ export const SortingPage: FC = () => {
 
   //по убыванию
   const selectionSortDes = async (arr: TArrNumber[]) => {
-    setLoader([false,true, true])
+    setLoader({ascBtn: false, descBtn: true, arrBtn: true})
     const { length } = arr;
     for (let i = 0; i < length - 1; i++) {
       let maxInd = i;
@@ -65,12 +68,12 @@ export const SortingPage: FC = () => {
     }
     arr[length - 1].color = ElementStates.Modified;
     setArr([...arr]);
-    setLoader([false,false, false])
+    setLoader({ascBtn: false, descBtn: false, arrBtn: false})
   }
 
   //по возрастанию
   const selectionSortAsc = async (arr: TArrNumber[]) => {
-    setLoader([true,false, true]);
+    setLoader({ascBtn: true, descBtn: false, arrBtn: true});
     const { length } = arr;
     for (let i = 0; i < length - 1; i++) {
       let minInd = i;
@@ -90,12 +93,12 @@ export const SortingPage: FC = () => {
     }
     arr[length - 1].color = ElementStates.Modified;
     setArr([...arr]);
-    setLoader([false,false, false])
+    setLoader({ascBtn: false, descBtn: false, arrBtn: false})
   }
 
   //по убыванию пузырьком
   const bubbleSortDes = async (arr: TArrNumber[]) => {
-    setLoader([false,true, true]);
+    setLoader({ascBtn: false, descBtn: true, arrBtn: true});
     const { length } = arr;
 
     for (let i = 0; i < length; i++) {
@@ -112,12 +115,12 @@ export const SortingPage: FC = () => {
       arr[length - i - 1].color = ElementStates.Modified;
     }
     setArr([...arr]);
-    setLoader([false,false, false]);
+    setLoader({ascBtn: false, descBtn: false, arrBtn: false});
   };
 
   //по возрастанию пузырьком
   const bubbleSortAsc = async (arr: TArrNumber[]) => {
-    setLoader([true,false, true]);
+    setLoader({ascBtn: true, descBtn: false, arrBtn: true});
     const { length } = arr;
 
     for (let i = 0; i < length; i++) {
@@ -134,7 +137,7 @@ export const SortingPage: FC = () => {
       arr[length - i - 1].color = ElementStates.Modified;
     }
     setArr([...arr]);
-    setLoader([false,false, false]);
+    setLoader({ascBtn: false, descBtn: false, arrBtn: false});
   };
 
   const selectInput = (item: string) => {
@@ -162,21 +165,21 @@ export const SortingPage: FC = () => {
             text='По возрастанию' 
             extraClass='ascending' 
             sorting={Direction.Ascending} 
-            disabled={loader[1]} isLoader={loader[0] ? true: false} 
+            disabled={loader.descBtn} isLoader={loader.ascBtn ? true: false} 
             onClick={() => {input.choice ? selectionSortAsc(arr) : bubbleSortAsc(arr)}}>
           </Button>
           <Button type='button' 
             text='По убыванию' 
             extraClass='descending' 
             sorting={Direction.Descending} 
-            disabled={loader[0]} isLoader={loader[1] ? true: false} 
+            disabled={loader.ascBtn} isLoader={loader.descBtn ? true: false} 
             onClick={() => {input.choice ? selectionSortDes(arr) : bubbleSortDes(arr)}}>
           </Button>
         </div>
         <Button type='submit' 
           text='Новый массив' 
           onClick={()=>handleClick} 
-          disabled={loader[2] ? true: false}>
+          disabled={loader.arrBtn ? true: false}>
         </Button>
       </form>
       <div  className={styles.result}>
