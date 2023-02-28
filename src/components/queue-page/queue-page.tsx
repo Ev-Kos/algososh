@@ -1,5 +1,6 @@
 import { FC, useState, useMemo, ChangeEvent } from 'react';
 import { SHORT_DELAY_IN_MS } from '../../constants/delays';
+import { HEAD, TAIL } from '../../constants/element-captions';
 import { ElementStates } from '../../types/element-states';
 import { TArrString } from '../../types/types';
 import { Button } from '../ui/button/button';
@@ -28,7 +29,7 @@ export const QueuePage: FC = () => {
   }
 
   const addElement = async () => {
-    setLoader({ addBtn: true, deleteBtn: false, clearBtn: false });
+    setLoader((prevState) => ({ ...prevState, addBtn: true}));
     queue.enqueue({value: string, color: ElementStates.Default});
     arr[queue.tail - 1] = {value: string , color: ElementStates.Changing}
     setArr([...arr])
@@ -37,11 +38,11 @@ export const QueuePage: FC = () => {
     setArr([...arr])
     await delay(SHORT_DELAY_IN_MS);
     setString('');
-    setLoader({ addBtn: false, deleteBtn: false, clearBtn: false }); 
+    setLoader((prevState) => ({ ...prevState, addBtn: false}));
   }
 
   const deleteElement = async () => {
-    setLoader({ addBtn: false, deleteBtn: true, clearBtn: false });
+    setLoader((prevState) => ({ ...prevState, deleteBtn: true}));
     arr[queue.head].color = ElementStates.Changing;
     setArr([...arr]);
     await delay(SHORT_DELAY_IN_MS)
@@ -49,15 +50,15 @@ export const QueuePage: FC = () => {
     arr[queue.head].color = ElementStates.Default;
     setArr([...arr]);
     queue.dequeue();
-    setLoader({ addBtn: false, deleteBtn: false, clearBtn: false });
+    setLoader((prevState) => ({ ...prevState, deleteBtn: false}));
   }
 
   const clear = async () => {
-    setLoader({ addBtn: false, deleteBtn: false, clearBtn: true });
+    setLoader((prevState) => ({ ...prevState, clearBtn: true}));
     queue.clear();
     setArr(Array(7).fill({value: '', color: ElementStates.Default}));
     await delay(SHORT_DELAY_IN_MS);
-    setLoader({ addBtn: false, deleteBtn: false, clearBtn: false });
+    setLoader((prevState) => ({ ...prevState, clearBtn: false}));
   }
 
   return (
@@ -86,7 +87,7 @@ export const QueuePage: FC = () => {
           type='button' 
           onClick={clear} 
           isLoader={loader.clearBtn} 
-          disabled={loader.addBtn || loader.deleteBtn}>
+          disabled={loader.addBtn || loader.deleteBtn || queue.isEmpty()}>
         </Button>
       </form>
       <div  className={styles.result}>
@@ -97,8 +98,8 @@ export const QueuePage: FC = () => {
               state={item.color} 
               key={index} 
               index={index} 
-              head={index === queue.head && arr[index] ? "head" : ""}
-              tail={index === queue.tail - 1 && arr[index] ? "tail" : ""}/>
+              head={index === queue.head && arr[index] ? HEAD : ''}
+              tail={index === queue.tail - 1 && arr[index] ? TAIL : ''}/>
           );
         })}
       </div>

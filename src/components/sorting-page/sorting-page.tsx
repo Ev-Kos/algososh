@@ -48,7 +48,7 @@ export const SortingPage: FC = () => {
 
   //по убыванию
   const selectionSortDes = async (arr: TArrNumber[]) => {
-    setLoader({ascBtn: false, descBtn: true, arrBtn: true})
+    setLoader((prevState) => ({ ...prevState, descBtn: true, arrBtn: true}));
     const { length } = arr;
     for (let i = 0; i < length - 1; i++) {
       let maxInd = i;
@@ -68,12 +68,12 @@ export const SortingPage: FC = () => {
     }
     arr[length - 1].color = ElementStates.Modified;
     setArr([...arr]);
-    setLoader({ascBtn: false, descBtn: false, arrBtn: false})
+    setLoader((prevState) => ({ ...prevState, descBtn: false, arrBtn: false}));
   }
 
   //по возрастанию
   const selectionSortAsc = async (arr: TArrNumber[]) => {
-    setLoader({ascBtn: true, descBtn: false, arrBtn: true});
+    setLoader((prevState) => ({ ...prevState, ascBtn: true, arrBtn: true}));
     const { length } = arr;
     for (let i = 0; i < length - 1; i++) {
       let minInd = i;
@@ -93,12 +93,12 @@ export const SortingPage: FC = () => {
     }
     arr[length - 1].color = ElementStates.Modified;
     setArr([...arr]);
-    setLoader({ascBtn: false, descBtn: false, arrBtn: false})
+    setLoader((prevState) => ({ ...prevState, ascBtn: false, arrBtn: false}));
   }
 
   //по убыванию пузырьком
   const bubbleSortDes = async (arr: TArrNumber[]) => {
-    setLoader({ascBtn: false, descBtn: true, arrBtn: true});
+    setLoader((prevState) => ({ ...prevState, descBtn: true, arrBtn: true}));
     const { length } = arr;
 
     for (let i = 0; i < length; i++) {
@@ -115,12 +115,12 @@ export const SortingPage: FC = () => {
       arr[length - i - 1].color = ElementStates.Modified;
     }
     setArr([...arr]);
-    setLoader({ascBtn: false, descBtn: false, arrBtn: false});
+    setLoader((prevState) => ({ ...prevState, descBtn: false, arrBtn: false}));
   };
 
   //по возрастанию пузырьком
   const bubbleSortAsc = async (arr: TArrNumber[]) => {
-    setLoader({ascBtn: true, descBtn: false, arrBtn: true});
+    setLoader((prevState) => ({ ...prevState, ascBtn: true, arrBtn: true}));
     const { length } = arr;
 
     for (let i = 0; i < length; i++) {
@@ -137,7 +137,7 @@ export const SortingPage: FC = () => {
       arr[length - i - 1].color = ElementStates.Modified;
     }
     setArr([...arr]);
-    setLoader({ascBtn: false, descBtn: false, arrBtn: false});
+    setLoader((prevState) => ({ ...prevState, ascBtn: false, arrBtn: false}));
   };
 
   const selectInput = (item: string) => {
@@ -157,22 +157,28 @@ export const SortingPage: FC = () => {
     <SolutionLayout title='Сортировка массива'>
       <form className={styles.form}>
         <div className={styles.radioButtons}>
-          <RadioInput label='Выбор' checked={input.choice} onChange={() => {selectInput('choice')}}/>
-          <RadioInput label='Пузырёк' checked={input.bubble} onChange={() => {selectInput('bubble')}}/>
+          <RadioInput label='Выбор' 
+            checked={input.choice} 
+            onChange={() => {selectInput('choice')}}/>
+          <RadioInput label='Пузырёк' 
+            checked={input.bubble} 
+            onChange={() => {selectInput('bubble')}}/>
         </div>
         <div className={styles.sortButtons}>
           <Button type='button' 
             text='По возрастанию' 
             extraClass='ascending' 
             sorting={Direction.Ascending} 
-            disabled={loader.descBtn} isLoader={loader.ascBtn ? true: false} 
+            disabled={loader.descBtn} 
+            isLoader={loader.ascBtn ? true: false} 
             onClick={() => {input.choice ? selectionSortAsc(arr) : bubbleSortAsc(arr)}}>
           </Button>
           <Button type='button' 
             text='По убыванию' 
             extraClass='descending' 
             sorting={Direction.Descending} 
-            disabled={loader.ascBtn} isLoader={loader.descBtn ? true: false} 
+            disabled={loader.ascBtn} 
+            isLoader={loader.descBtn ? true: false} 
             onClick={() => {input.choice ? selectionSortDes(arr) : bubbleSortDes(arr)}}>
           </Button>
         </div>

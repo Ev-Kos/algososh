@@ -28,7 +28,7 @@ export const StackPage: FC = () => {
   }
 
   const addElement = async () => {
-    setLoader({ addBtn: true, deleteBtn: false, clearBtn: false });
+    setLoader((prevState) => ({ ...prevState, addBtn: true}));
     stack.push({value: string, color: ElementStates.Default});
     const top = stack.peak();
     setArr([...arr, {value: top?.value 
@@ -39,12 +39,12 @@ export const StackPage: FC = () => {
       ? top.value 
       : '', color: ElementStates.Default}])
     await delay(SHORT_DELAY_IN_MS);
-    setLoader({ addBtn: false, deleteBtn: false, clearBtn: false });
+    setLoader((prevState) => ({ ...prevState, addBtn: false}));
     setString('');
   }
 
   const deleteElement = async () => {
-    setLoader({ addBtn: false, deleteBtn: true, clearBtn: false });
+    setLoader((prevState) => ({ ...prevState, deleteBtn: true}));
     arr[arr.length - 1].color = ElementStates.Changing;
     setArr([...arr]);
     await delay(SHORT_DELAY_IN_MS);
@@ -52,15 +52,15 @@ export const StackPage: FC = () => {
     arr.pop();
     setArr([...arr]);
     await delay(SHORT_DELAY_IN_MS);
-    setLoader({ addBtn: false, deleteBtn: false, clearBtn: false });
+    setLoader((prevState) => ({ ...prevState, deleteBtn: false}));
   }
 
   const clear = async () => {
-    setLoader({ addBtn: false, deleteBtn: false, clearBtn: true });
+    setLoader((prevState) => ({ ...prevState, clearBtn: true}));
     stack.clear();
     setArr([]);
     await delay(SHORT_DELAY_IN_MS);
-    setLoader({ addBtn: false, deleteBtn: false, clearBtn: false });
+    setLoader((prevState) => ({ ...prevState, clearBtn: false}));
   }
 
   return (

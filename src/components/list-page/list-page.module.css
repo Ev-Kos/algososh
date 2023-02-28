@@ -1,0 +1,51 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 952px;
+    margin: auto;
+}
+
+.container {
+    display: flex;
+    gap: 12px;
+}
+
+.result {
+    margin-top: 90px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 17px;
+    row-gap: 56px;
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 25px;
+}
+
+.circle {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    align-items: center;
+    position: relative;
+}
+
+.topCircle {
+    position: absolute;
+    top: -70px;
+}
+
+.bottomCircle {
+    position: absolute;
+    top: 118px;
+}
+
+.input {
+    max-width: 204px;
+}
