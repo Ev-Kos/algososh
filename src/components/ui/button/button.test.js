@@ -3,16 +3,16 @@ import { Button } from './button';
 
 describe('Тестирование компонента Button', () => {
     it('Кнопка с текстом', () => {
-        render(<Button text='text' />);
-        const btn = screen.getByText('text');
-        expect(btn).toBeInTheDocument();
+        const btn = render(<Button text='text' />);
+        const text = screen.getByText('text');
+        expect(text).toBeInTheDocument();
         expect(btn).toMatchSnapshot();
     });
 
     it('Кнопка без текста', () => {
-        render(<Button />);
-        const btn = screen.getByRole('button');
-        expect(btn).toBeInTheDocument();
+        const btn = render(<Button />);
+        const withoutText = screen.getByRole('button');
+        expect(withoutText).toBeInTheDocument();
         expect(btn).toMatchSnapshot();
     });
 
