@@ -7,7 +7,7 @@ import styles from './sorting-page.module.css';
 import { ElementStates } from '../../types/element-states';
 import { SHORT_DELAY_IN_MS } from '../../constants/delays';
 import { Direction } from '../../types/direction';
-import { delay, swap } from '../utils/utils';
+import { bubbleSortAscGen, bubbleSortDesGen, delay, selectionSortAscGen, selectionSortDesGen, swap } from '../utils/utils';
 import { TArrNumber } from '../../types/types';
 
 type TInput = {
@@ -20,7 +20,8 @@ export const SortingPage: FC = () => {
   const [loader, setLoader]= useState({
     ascBtn: false,
     descBtn: false,
-    arrBtn: false});
+    arrBtn: false
+  });
   const [input, setInput] = useState<TInput>({choice: true, bubble: false});
 
   const randomArr = () => {
@@ -46,28 +47,21 @@ export const SortingPage: FC = () => {
     randomArr(); 
   };
 
+  
+
   //по убыванию
   const selectionSortDes = async (arr: TArrNumber[]) => {
     setLoader((prevState) => ({ ...prevState, descBtn: true, arrBtn: true}));
     const { length } = arr;
+    let gen = selectionSortDesGen(arr)
     for (let i = 0; i < length - 1; i++) {
-      let maxInd = i;
       for (let j = i + 1; j < length; j++) {
-        arr[i].color = ElementStates.Changing;
-        arr[j].color = ElementStates.Changing;
-        setArr([...arr]);
+        setArr(gen.next().value);
         await delay(SHORT_DELAY_IN_MS)
-        if (arr[j].value > arr[maxInd].value) {
-          maxInd = j;   
-        }
-        arr[j].color = ElementStates.Default;
-        setArr([...arr]);
+        setArr(gen.next().value);
       }
-      swap(arr, i, maxInd);
-      arr[i].color = ElementStates.Modified;
     }
-    arr[length - 1].color = ElementStates.Modified;
-    setArr([...arr]);
+    setArr(gen.next().value);
     setLoader((prevState) => ({ ...prevState, descBtn: false, arrBtn: false}));
   }
 
@@ -75,24 +69,15 @@ export const SortingPage: FC = () => {
   const selectionSortAsc = async (arr: TArrNumber[]) => {
     setLoader((prevState) => ({ ...prevState, ascBtn: true, arrBtn: true}));
     const { length } = arr;
+    let gen = selectionSortAscGen(arr);
     for (let i = 0; i < length - 1; i++) {
-      let minInd = i;
       for (let j = i + 1; j < length; j++) {
-        arr[i].color = ElementStates.Changing;
-        arr[j].color = ElementStates.Changing;
-        setArr([...arr]);
+        setArr(gen.next().value);
         await delay(SHORT_DELAY_IN_MS)
-        if (arr[j].value < arr[minInd].value) {
-          minInd = j;   
-        }
-        arr[j].color = ElementStates.Default;
-        setArr([...arr]);
+        setArr(gen.next().value);
       }
-      swap(arr, i, minInd);
-      arr[i].color = ElementStates.Modified;
     }
-    arr[length - 1].color = ElementStates.Modified;
-    setArr([...arr]);
+    setArr(gen.next().value);
     setLoader((prevState) => ({ ...prevState, ascBtn: false, arrBtn: false}));
   }
 
@@ -100,21 +85,15 @@ export const SortingPage: FC = () => {
   const bubbleSortDes = async (arr: TArrNumber[]) => {
     setLoader((prevState) => ({ ...prevState, descBtn: true, arrBtn: true}));
     const { length } = arr;
+    let gen = bubbleSortDesGen(arr);
 
     for (let i = 0; i < length; i++) {
       for (let j = 0; j < length - i - 1; j++) {
-        arr[j].color = ElementStates.Changing;
-        arr[j + 1].color = ElementStates.Changing;
-        setArr([...arr]);
+        setArr(gen.next().value);
         await delay(SHORT_DELAY_IN_MS);
-        if (arr[j].value < arr[j + 1].value) {
-          swap(arr, j, j + 1);
-        }
-        arr[j].color = ElementStates.Default;
       }
-      arr[length - i - 1].color = ElementStates.Modified;
     }
-    setArr([...arr]);
+    setArr(gen.next().value);
     setLoader((prevState) => ({ ...prevState, descBtn: false, arrBtn: false}));
   };
 
@@ -122,21 +101,15 @@ export const SortingPage: FC = () => {
   const bubbleSortAsc = async (arr: TArrNumber[]) => {
     setLoader((prevState) => ({ ...prevState, ascBtn: true, arrBtn: true}));
     const { length } = arr;
+    let gen = bubbleSortAscGen(arr);
 
     for (let i = 0; i < length; i++) {
       for (let j = 0; j < length - i - 1; j++) {
-        arr[j].color = ElementStates.Changing;
-        arr[j + 1].color = ElementStates.Changing;
-        setArr([...arr]);
+        setArr(gen.next().value);
         await delay(SHORT_DELAY_IN_MS);
-        if (arr[j].value > arr[j + 1].value) {
-          swap(arr, j, j + 1);
-        }
-        arr[j].color = ElementStates.Default;
       }
-      arr[length - i - 1].color = ElementStates.Modified;
     }
-    setArr([...arr]);
+    setArr(gen.next().value);
     setLoader((prevState) => ({ ...prevState, ascBtn: false, arrBtn: false}));
   };
 
