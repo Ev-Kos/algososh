@@ -30,7 +30,9 @@ export function* selectionSortDesGen(arr: TArrNumber[]): Generator<TArrNumber[]>
         swap(arr, i, maxInd);
         arr[i].color = ElementStates.Modified;
     }
-    arr[length - 1].color = ElementStates.Modified;
+    if(arr[length - 1]) {
+        arr[length - 1].color = ElementStates.Modified;
+    }
     yield [...arr];
 };
 
@@ -52,7 +54,9 @@ export function* selectionSortAscGen(arr: TArrNumber[]): Generator<TArrNumber[]>
         swap(arr, i, minInd);
         arr[i].color = ElementStates.Modified;
     }
-    arr[length - 1].color = ElementStates.Modified;
+    if(arr[length - 1]) {
+        arr[length - 1].color = ElementStates.Modified;
+    }
     yield [...arr];
 };
 
