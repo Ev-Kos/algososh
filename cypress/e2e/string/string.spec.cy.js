@@ -11,13 +11,14 @@ describe('Тестирования разворота строки', () => {
     });
 
     it('Если в инпуте пусто, кнопка не активна', () => {
-        cy.get('button').should('be.disabled');
+        cy.get('@input').should('have.value', '');
+        cy.get('@button').should('be.disabled');
     });
 
     it('Строка разворачивается корректно', () => {
         cy.clock();
         cy.get('@input').type('word').should('have.value', 'word');
-        cy.get('@button').click();
+        cy.get('@button').should('be.not.disabled').click();
         cy.get('div[class*="circle_circle"]').should('have.length', 4).as('circles');
 
         cy.get('@circles').eq(0)
