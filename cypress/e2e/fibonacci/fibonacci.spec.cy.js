@@ -1,3 +1,5 @@
+import {DELAY_IN_MS} from '../../../src/constants/delays';
+
 describe('Тестирование последовательности Фибоначчи', () => {
     const result = [1, 1, 2, 3, 5, 8];
     const colorDefault = "rgb(0, 50, 255)";
@@ -12,12 +14,17 @@ describe('Тестирование последовательности Фибо
         cy.get('@button').should('be.disabled');
     });
 
-    // it('Числа генерируются корректно', () => {
-    //     // cy.clock();
-    //     // cy.get('@input').type('5').should('have.value', '5');
-    //     // cy.get('@button').should('be.not.disabled').click();
+    it('Числа генерируются корректно', () => {
+        cy.get('@input').type(5).should('have.value', 5);
+        cy.get('div[class*=result]').children().should('have.length', 0);
+        cy.get('@button').should('be.not.disabled').click();
 
-    //     cy.get('div[class*="circle_circle"]')
-        
-    // });
+        for (let i = 0; i < result.length; i++) {
+             cy.get('div[class*=result]')
+               .children()
+               .last()
+               .find('div[class*="circle_circle"]')
+               .should('have.text', result[i]);
+        }    
+    });
 })

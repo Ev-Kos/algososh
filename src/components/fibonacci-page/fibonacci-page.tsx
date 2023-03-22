@@ -53,7 +53,6 @@ export const FibonacciPage: FC = () => {
       </form>
       <div  className={styles.result}>
         {arrNumber.map((value, index)=> (
-          
            <Circle letter={String(value)} key={index} index={index}/>
           ))
         }
