@@ -244,7 +244,8 @@ export const ListPage: FC = () => {
     <SolutionLayout title="Связный список">
       <form className={styles.form}>
         <div className={styles.container}>
-          <Input value={value} 
+          <Input data-testid='inputValue'
+            value={value} 
             isLimitText={true} 
             onChange={onChangeValue} 
             maxLength={4} 
@@ -294,7 +295,8 @@ export const ListPage: FC = () => {
           </Button>
         </div>
         <div className={styles.container}>
-          <Input value={index? `${index}` : ''} 
+          <Input data-testid='inputIndex'
+            value={index? `${index}` : ''} 
             placeholder='Введите индекс' 
             type='number' 
             max={list.length - 1} 
@@ -357,7 +359,7 @@ export const ListPage: FC = () => {
                 }
               </div>
               {list.length - 1 !== index &&
-                <ArrowIcon fill={item.arrow ? '#D252E1' : '#0032FF'}/>
+                <ArrowIcon data-testid='arrow' fill={item.arrow ? '#D252E1' : '#0032FF'}/>
               }
             </div>
           )
