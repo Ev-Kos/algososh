@@ -10,19 +10,23 @@ Object {
       >
         <div
           class="text text_type_input text_color_input mb-4 absolute head element"
+          data-testid="head"
         />
         <div
           class="circle   default"
         >
           <p
             class="text text_type_circle text_color_input letter"
+            data-testid="letter"
           />
         </div>
         <p
           class="text text_type_input text_color_input mt-4 absolute index"
+          data-testid="index"
         />
         <div
           class="text text_type_input text_color_input mt-4 absolute tail30 element"
+          data-testid="tail"
         />
       </div>
     </div>
@@ -33,19 +37,23 @@ Object {
     >
       <div
         class="text text_type_input text_color_input mb-4 absolute head element"
+        data-testid="head"
       />
       <div
         class="circle   default"
       >
         <p
           class="text text_type_circle text_color_input letter"
+          data-testid="letter"
         />
       </div>
       <p
         class="text text_type_input text_color_input mt-4 absolute index"
+        data-testid="index"
       />
       <div
         class="text text_type_input text_color_input mt-4 absolute tail30 element"
+        data-testid="tail"
       />
     </div>
   </div>,
@@ -113,6 +121,7 @@ Object {
       >
         <div
           class="text text_type_input text_color_input mb-4 absolute head string"
+          data-testid="head"
         >
           test
         </div>
@@ -121,13 +130,16 @@ Object {
         >
           <p
             class="text text_type_circle text_color_input letter"
+            data-testid="letter"
           />
         </div>
         <p
           class="text text_type_input text_color_input mt-4 absolute index"
+          data-testid="index"
         />
         <div
           class="text text_type_input text_color_input mt-4 absolute tail30 element"
+          data-testid="tail"
         />
       </div>
     </div>
@@ -138,6 +150,7 @@ Object {
     >
       <div
         class="text text_type_input text_color_input mb-4 absolute head string"
+        data-testid="head"
       >
         test
       </div>
@@ -146,13 +159,16 @@ Object {
       >
         <p
           class="text text_type_circle text_color_input letter"
+          data-testid="letter"
         />
       </div>
       <p
         class="text text_type_input text_color_input mt-4 absolute index"
+        data-testid="index"
       />
       <div
         class="text text_type_input text_color_input mt-4 absolute tail30 element"
+        data-testid="tail"
       />
     </div>
   </div>,
@@ -220,25 +236,30 @@ Object {
       >
         <div
           class="text text_type_input text_color_input mb-4 absolute head element"
+          data-testid="head"
         >
           <div
             class="content "
           >
             <div
               class="text text_type_input text_color_input mb-4 absolute head element"
+              data-testid="head"
             />
             <div
               class="circle   default"
             >
               <p
                 class="text text_type_circle text_color_input letter"
+                data-testid="letter"
               />
             </div>
             <p
               class="text text_type_input text_color_input mt-4 absolute index"
+              data-testid="index"
             />
             <div
               class="text text_type_input text_color_input mt-4 absolute tail30 element"
+              data-testid="tail"
             />
           </div>
         </div>
@@ -247,13 +268,16 @@ Object {
         >
           <p
             class="text text_type_circle text_color_input letter"
+            data-testid="letter"
           />
         </div>
         <p
           class="text text_type_input text_color_input mt-4 absolute index"
+          data-testid="index"
         />
         <div
           class="text text_type_input text_color_input mt-4 absolute tail30 element"
+          data-testid="tail"
         />
       </div>
     </div>
@@ -264,25 +288,30 @@ Object {
     >
       <div
         class="text text_type_input text_color_input mb-4 absolute head element"
+        data-testid="head"
       >
         <div
           class="content "
         >
           <div
             class="text text_type_input text_color_input mb-4 absolute head element"
+            data-testid="head"
           />
           <div
             class="circle   default"
           >
             <p
               class="text text_type_circle text_color_input letter"
+              data-testid="letter"
             />
           </div>
           <p
             class="text text_type_input text_color_input mt-4 absolute index"
+            data-testid="index"
           />
           <div
             class="text text_type_input text_color_input mt-4 absolute tail30 element"
+            data-testid="tail"
           />
         </div>
       </div>
@@ -291,13 +320,16 @@ Object {
       >
         <p
           class="text text_type_circle text_color_input letter"
+          data-testid="letter"
         />
       </div>
       <p
         class="text text_type_input text_color_input mt-4 absolute index"
+        data-testid="index"
       />
       <div
         class="text text_type_input text_color_input mt-4 absolute tail30 element"
+        data-testid="tail"
       />
     </div>
   </div>,
@@ -365,19 +397,23 @@ Object {
       >
         <div
           class="text text_type_input text_color_input mb-4 absolute head element"
+          data-testid="head"
         />
         <div
           class="circle   default"
         >
           <p
             class="text text_type_circle text_color_input letter"
+            data-testid="letter"
           />
         </div>
         <p
           class="text text_type_input text_color_input mt-4 absolute index"
+          data-testid="index"
         />
         <div
           class="text text_type_input text_color_input mt-4 absolute tail30 string"
+          data-testid="tail"
         >
           test
         </div>
@@ -390,19 +426,23 @@ Object {
     >
       <div
         class="text text_type_input text_color_input mb-4 absolute head element"
+        data-testid="head"
       />
       <div
         class="circle   default"
       >
         <p
           class="text text_type_circle text_color_input letter"
+          data-testid="letter"
         />
       </div>
       <p
         class="text text_type_input text_color_input mt-4 absolute index"
+        data-testid="index"
       />
       <div
         class="text text_type_input text_color_input mt-4 absolute tail30 string"
+        data-testid="tail"
       >
         test
       </div>
@@ -472,21 +512,25 @@ Object {
       >
         <div
           class="text text_type_input text_color_input mb-4 absolute head element"
+          data-testid="head"
         />
         <div
           class="circle   default"
         >
           <p
             class="text text_type_circle text_color_input letter"
+            data-testid="letter"
           >
             test
           </p>
         </div>
         <p
           class="text text_type_input text_color_input mt-4 absolute index"
+          data-testid="index"
         />
         <div
           class="text text_type_input text_color_input mt-4 absolute tail30 element"
+          data-testid="tail"
         />
       </div>
     </div>
@@ -497,21 +541,25 @@ Object {
     >
       <div
         class="text text_type_input text_color_input mb-4 absolute head element"
+        data-testid="head"
       />
       <div
         class="circle   default"
       >
         <p
           class="text text_type_circle text_color_input letter"
+          data-testid="letter"
         >
           test
         </p>
       </div>
       <p
         class="text text_type_input text_color_input mt-4 absolute index"
+        data-testid="index"
       />
       <div
         class="text text_type_input text_color_input mt-4 absolute tail30 element"
+        data-testid="tail"
       />
     </div>
   </div>,
