@@ -1,3 +1,5 @@
+import { circle } from "../constans";
+
 describe('Тестирование последовательности Фибоначчи', () => {
     const result = [1, 1, 2, 3, 5, 8];
     beforeEach(() => {
@@ -20,8 +22,8 @@ describe('Тестирование последовательности Фибо
             cy.get('div[class*=result]')
                 .children()
                 .last()
-                .find('div[class*="circle_circle"]')
+                .find(circle)
                 .should('have.text', result[i]);
-        }    
+        };    
     });
 })
