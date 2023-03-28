@@ -3,7 +3,10 @@
 ## Описание проекта
 
 С макетом можно ознакомится по [ссылке.](https://www.figma.com/file/RIkypcTQN5d37g7RRTFid0/Algososh_external_link?node-id=0%3A1)
-В проекте реализована визуализация алгоритмов:
+
+[Открыть проект.](https://ev-kos.github.io/algososh/)
+
+В проекте реализована визуализация алгоритмов с использованием Unit-тестирования (Jest) и E2E тестирования (Cypress):
 
 - #### Разворот строки
 <img src="README_static/string.png" width="550" height="350"/>
