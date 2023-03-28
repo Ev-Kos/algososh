@@ -52,10 +52,9 @@ export const FibonacciPage: FC = () => {
         </Button>
       </form>
       <div  className={styles.result}>
-        {arrNumber.map((value, index)=> 
-          {
-           return <Circle letter={String(value)} key={index} index={index}/>
-          })
+        {arrNumber.map((value, index)=> (
+           <Circle letter={String(value)} key={index} index={index}/>
+          ))
         }
       </div>
     </SolutionLayout>

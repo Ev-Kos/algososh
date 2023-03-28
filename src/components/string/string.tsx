@@ -76,8 +76,13 @@ export const StringComponent: FC = () => {
   return (
     <SolutionLayout title='Строка'>
       <form className={styles.form} onSubmit={handleClick}>
-        <Input isLimitText={true} maxLength={11} onChange={onChange}></Input>
+        <Input data-testid='input' 
+          isLimitText={true} 
+          maxLength={11} 
+          onChange={onChange}>
+        </Input>
         <Button text='Развернуть' 
+          data-testid='button'
           type='submit' 
           isLoader={count.loader} 
           disabled={string.length > 0 ? false: true}>
@@ -86,7 +91,10 @@ export const StringComponent: FC = () => {
       <div  className={styles.result}>
         {
           arrStr?.map((item, index)=>(
-            <Circle letter={item.value} key={index} state={item.color}/>
+            <Circle data-testid='circle' 
+            letter={item.value} 
+            key={index} 
+            state={item.color}/>
           ))
         }
       </div>
