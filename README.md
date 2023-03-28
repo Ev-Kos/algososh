@@ -32,6 +32,8 @@
 <img src="https://github.com/devicons/devicon/blob/master/icons/css3/css3-original-wordmark.svg" width="60" height="60"/>&nbsp; 
 <img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original-wordmark.svg" width="60" height="60"/>&nbsp;
 <img src="https://github.com/devicons/devicon/blob/master/icons/typescript/typescript-original.svg" width="60" height="60"/>&nbsp;
+<img src="README_static/cypress.png" width="100" height="60"/>&nbsp;
+<img src="README_static/jest.png" width="100" height="60"/>&nbsp;
 
 ## Запуск проекта
 
